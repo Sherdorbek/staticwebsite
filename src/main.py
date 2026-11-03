@@ -27,15 +27,15 @@ def update_content(basepath):
 
 	copy_dir(static_path,public_path)
 
-	generate_all(content_path,parent_dir+"/template.html",public_path)	
+	generate_all(content_path,parent_dir+"/template.html",public_path,basepath)	
 
 
-def generate_all(content_path,template_path,public_path):
+def generate_all(content_path,template_path,public_path,basepath):
 	for f in os.listdir(content_path):
 		if os.path.isfile(content_path+f):
-			generate_page(content_path+f,template_path,public_path+f)
+			generate_page(content_path+f,template_path,public_path+f,basepath)
 		else:
-			generate_all(content_path+f+"/",template_path,public_path+f+"/")
+			generate_all(content_path+f+"/",template_path,public_path+f+"/",basepath)
 
 def copy_dir(a: str, b: str):
 	for f in os.listdir(a):

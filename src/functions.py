@@ -238,7 +238,7 @@ def extract_title(markdown: str) -> str:
 	return blocks[0].strip()[2:]
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
 	print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 	file = open(from_path, "r")
 	file_temp = open(template_path, "r")
@@ -251,7 +251,8 @@ def generate_page(from_path, template_path, dest_path):
 
 
 	page = template.replace('{{ Title }}',title).replace("{{ Content }}",content_html)
-
+	page = page.replace('href="/','href="'+basepath)
+	page = page.replace('src="/','src="'+basepath)
 	parent = os.path.dirname(dest_path)
 	if parent:
 		os.makedirs(parent,exist_ok=True)
