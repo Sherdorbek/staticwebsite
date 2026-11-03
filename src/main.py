@@ -6,10 +6,9 @@ from functions import generate_page
 
 
 def main():
-	basepath = "/"
+	basepath = ""
 	if len(sys.argv) > 1:
 		basepath = sys.argv[1]
-
 	update_content(basepath)
 
 def update_content(basepath):
@@ -17,9 +16,12 @@ def update_content(basepath):
 	parent = src_dir.parent
 	parent_dir = str(parent)
 	static_path = os.path.join(parent,"static/")
-	public_path = os.path.join(parent,"docs/")
+	public_path_root = os.path.join(parent, basepath[1:])
+	public_path = public_path_root+"docs/"
 	content_path = os.path.join(parent,"content/")
-	print (parent_dir)
+
+	if not os.path.exists(public_path_root):
+		os.mkdir(public_path_root)
 	shutil.rmtree(public_path,ignore_errors=True)
 	os.mkdir(public_path)
 
