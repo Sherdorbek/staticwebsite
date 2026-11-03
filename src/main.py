@@ -1,20 +1,25 @@
 import shutil
 import os
+import sys
 from pathlib import Path
 from functions import generate_page
 
 
 def main():
-	update_content()
+	basepath = "/"
+	if len(sys.argv) > 1:
+		basepath = sys.argv[1]
 
-def update_content():
+	update_content(basepath)
+
+def update_content(basepath):
 	src_dir = Path(__file__).resolve().parent
 	parent = src_dir.parent
 	parent_dir = str(parent)
 	static_path = os.path.join(parent,"static/")
-	public_path = os.path.join(parent,"public/")
+	public_path = os.path.join(parent,"docs/")
 	content_path = os.path.join(parent,"content/")
-
+	print (parent_dir)
 	shutil.rmtree(public_path,ignore_errors=True)
 	os.mkdir(public_path)
 
