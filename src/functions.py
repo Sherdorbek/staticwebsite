@@ -251,8 +251,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
 
 
 	page = template.replace('{{ Title }}',title).replace("{{ Content }}",content_html)
-	# page = page.replace('href="/','href="'+basepath)
-	# page = page.replace('src="/','src="'+basepath)
+	page = page.replace('href="/','href="'+basepath)
+	page = page.replace('src="/','src="'+basepath)
 	parent = os.path.dirname(dest_path)
 	if parent:
 		os.makedirs(parent,exist_ok=True)
